@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block title %}
+<title>Categories list</title>
+{% endblock title %}
+
+{% block content %}
+<ol>
+{% for category in categories %}
+
+    <li><a href="{{category.get_absolute_url}}">{{category.name}}</a></li>
+
+</ol>
+
+{% endfor %}
+{% endblock content %}
+

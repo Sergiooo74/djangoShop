@@ -1,0 +1,26 @@
+{% extends 'base_admin.html' %}
+
+{% block title %}
+<title>Admin panel</title>
+{% endblock title %}
+
+{% block content %}
+{{ total }}
+<div class="actions">
+    <div class="actions-category">
+        <div class="action">
+            <a href="{% url 'category_add' %}">Add category</a>
+        </div>
+        <div class="action">
+            <a href="{% url 'categories' %}">See categories</a>
+        </div>
+    </div>
+
+    <div class="action">
+        <a href="#">Add product</a>
+    </div>
+    <div class="action">
+        <a href="#">See products</a>
+    </div>
+</div>
+{% endblock content %}

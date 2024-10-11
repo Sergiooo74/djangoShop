@@ -1,4 +1,6 @@
 from django.db import models
+from slugify import slugify
+
 
 class Category(models.Model):
     name = models.CharField(max_length=200, verbose_name="Category")
@@ -14,6 +16,10 @@ class Category(models.Model):
 
     def __str__(self):
         return self.name
+
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
 class Product(models.Model):
     category = models.ForeignKey(Category,
@@ -35,7 +41,12 @@ class Product(models.Model):
             models.Index(fields=['name']),
             models.Index(fields=['created']),
         ]
+        verbose_name = 'Product'
+        verbose_name_plural = 'Products'
+
 
     def ___str__(self):
         return self.name
+
+    def save
 

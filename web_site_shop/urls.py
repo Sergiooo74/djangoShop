@@ -16,8 +16,10 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
+from shop.views import AdminTemplateView
 
 urlpatterns = [
+    path('staff/', AdminTemplateView.as_view(), name="admin-page"),
     path('admin/', admin.site.urls),
     path('product/', include('shop.urls'))
 ]

@@ -9,4 +9,4 @@ class CategoryCreateForm(forms.ModelForm):
 class ProductCreateForm(forms.ModelForm):
     class Meta:
         model = Product
-        exclude = ['slug', 'created', 'updated']
+        exclude = ('slug', 'created', 'updated')
