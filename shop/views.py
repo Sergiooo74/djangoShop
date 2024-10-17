@@ -1,7 +1,6 @@
-from django.shortcuts import render
 from django.views.generic import (ListView, CreateView,
-                                  UpdateView, DeleteView,
-                                DetailView, TemplateView)
+                                  UpdateView, DetailView,
+                                  DeleteView, TemplateView)
 
 from django.urls import reverse_lazy
 
@@ -11,15 +10,17 @@ from .forms import CategoryCreateForm, ProductCreateForm
 class AdminTemplateView(TemplateView):
     template_name = 'shop/admin.html'
 
-    def get_context_data(self, **kwargs):
-        context = super().get_context_data(**kwargs)
-        context['total'] = 5
-        return context
+    # def get_context_data(self, **kwargs):
+    #     context = super().get_context_data(**kwargs)
+    #     context['total'] = 5
+    #     return context
 
 
 class ProductCreateView(CreateView):
     model = Product
-    exclude = ['slug', 'created', 'updated']
+    form_class = ProductCreateForm
+    template_name = 'shop/product_add.html'
+    success_url = reverse_lazy('products')
 
 
 class ProductListView(ListView):
@@ -29,7 +30,6 @@ class ProductListView(ListView):
 
 class CategoryCreateView(CreateView):
     model = Category
-    fields = ['name']
     form_class = CategoryCreateForm
     template_name = 'shop/category_add.html'
     success_url = reverse_lazy('categories')

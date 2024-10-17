@@ -10,3 +10,11 @@ class ProductCreateForm(forms.ModelForm):
     class Meta:
         model = Product
         exclude = ('slug', 'created', 'updated')
+
+        labels = {
+            'category': 'Category',
+            'description': 'Description',
+            'image': 'Image',
+            'available': 'Available',
+            'price': 'Price',
+        }

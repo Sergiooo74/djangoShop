@@ -21,5 +21,5 @@ from shop.views import AdminTemplateView
 urlpatterns = [
     path('staff/', AdminTemplateView.as_view(), name="admin-page"),
     path('admin/', admin.site.urls),
-    path('product/', include('shop.urls'))
+    path('product/', include('shop.urls')),
 ]

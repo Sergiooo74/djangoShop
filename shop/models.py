@@ -1,4 +1,5 @@
 from django.db import models
+from django.urls import reverse
 from slugify import slugify
 
 
@@ -21,6 +22,9 @@ class Category(models.Model):
         self.slug = slugify(self.name)
         super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('category_detail', kwargs={'slug': self.slug})
+
 class Product(models.Model):
     category = models.ForeignKey(Category,
                                  related_name='products',
@@ -39,14 +43,18 @@ class Product(models.Model):
         indexes = [
             models.Index(fields=['id', 'slug']),
             models.Index(fields=['name']),
-            models.Index(fields=['created']),
+            models.Index(fields=['-created']),
         ]
         verbose_name = 'Product'
         verbose_name_plural = 'Products'
 
 
-    def ___str__(self):
+    def __str__(self):
         return self.name
 
-    def save
+    def save(self, *args, **kwargs):
+        self.slug = slugify(self.name)
+        super().save(*args, **kwargs)
 
+    def get_absolute_url(self):
+        return reverse('product_detail', kwargs={'slug': self.slug})
